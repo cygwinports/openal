@@ -1,4 +1,3 @@
-diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x ltmain.sh -x 'config.*' -x depcomp -x install-sh -x missing -x mkinstalldirs -x autom4te.cache -x '*compile' -x 'intltool*.in' -x 'xml-i18n-*.in' -x '*.pyc' -x '*.mo' -x '*.gmo' -x ABOUT-NLS -x Makevars.template -x COPYING -x INSTALL -x '*.orig' -x '*.rej' -x '*~' -x '*.temp' -x 'Makefile.in*' -x configure openal-0.0.8-orig/configure.ac openal-0.0.8/configure.ac
 --- openal-0.0.8-orig/configure.ac	2006-02-11 03:36:55.000000000 -0600
 +++ openal-0.0.8/configure.ac	2006-05-12 18:01:13.426375000 -0500
 @@ -648,7 +648,7 @@
@@ -10,7 +9,6 @@ diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x ltmain.sh -x 'config.*' -x depco
      *) openal_backend_bsd_support=none
         if test "x$enable_bsd" = xyes; then
           AC_MSG_WARN([--enable-bsd ignored because this is no BSD build.])
-diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x ltmain.sh -x 'config.*' -x depcomp -x install-sh -x missing -x mkinstalldirs -x autom4te.cache -x '*compile' -x 'intltool*.in' -x 'xml-i18n-*.in' -x '*.pyc' -x '*.mo' -x '*.gmo' -x ABOUT-NLS -x Makevars.template -x COPYING -x INSTALL -x '*.orig' -x '*.rej' -x '*~' -x '*.temp' -x 'Makefile.in*' -x configure openal-0.0.8-orig/src/backends/alc_backend_bsd.c openal-0.0.8/src/backends/alc_backend_bsd.c
 --- openal-0.0.8-orig/src/backends/alc_backend_bsd.c	2006-01-05 09:11:20.000000000 -0600
 +++ openal-0.0.8/src/backends/alc_backend_bsd.c	2006-05-12 18:27:46.379500000 -0500
 @@ -9,7 +9,7 @@
