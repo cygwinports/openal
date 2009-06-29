@@ -1,5 +1,5 @@
 category: Audio
-requires: cygwin libSDL libesound0 libvorbisfile3 smpeg
+requires: libSDL libesound0 libvorbisfile3 smpeg
 external-source: openal
 sdesc: "Cross-platform 3D audio library (runtime)"
 ldesc: "OpenAL is a cross-platform 3D audio API appropriate for use with
