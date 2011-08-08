@@ -1,0 +1,11 @@
+--- origsrc/openal-soft-1.13/Alc/portaudio.c	2010-12-04 19:36:20.000000000 -0600
++++ src/openal-soft-1.13/Alc/portaudio.c	2011-08-08 11:57:55.480527200 -0500
+@@ -72,6 +72,8 @@ void *pa_load(void)
+     const char *str;
+ #if defined(__APPLE__) && defined(__MACH__)
+ # define PALIB "libportaudio.2.dylib"
++#elif defined(__CYGWIN__)
++# define PALIB "cygportaudio-2.dll"
+ #else
+ # define PALIB "libportaudio.so.2"
+ #endif

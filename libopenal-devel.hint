@@ -1,5 +1,6 @@
 category: Audio
-requires: libSDL-devel libesound-devel libvorbis-devel smpeg
+requires: libopenal1
+external-source: openal
 sdesc: "Cross-platform 3D audio library (development)"
 ldesc: "OpenAL is a cross-platform 3D audio API appropriate for use with
 gaming applications and many other types of audio applications.
