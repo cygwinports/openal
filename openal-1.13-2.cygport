@@ -5,7 +5,7 @@ inherit cmake
 DESCRIPTION="Cross-platform 3D audio API"
 HOMEPAGE="http://kcat.strangesoft.net/openal.html"
 SRC_URI="http://kcat.strangesoft.net/openal-releases/${ORIG_PN}-${PV}.tar.bz2"
-PATCH_URI="1.13-cygwin-portaudio.patch"
+PATCH_URI="1.13-cygwin.patch"
 
 PKG_NAMES="openal libopenal1 libopenal-devel"
 openal_CONTENTS="usr/bin/*.exe usr/share/"
@@ -13,15 +13,19 @@ libopenal1_CONTENTS="usr/bin/cygopenal-1.dll"
 libopenal_devel_CONTENTS="usr/include/ usr/lib/"
 
 # OSS backend plays incorrectly on Cygwin
+# PORTAUDIO adds nothing over WINMM support
+# PTHREAD means -pthread flag not pthread usage
 CYGCMAKE_ARGS="
 	-DALSA=OFF
 	-DOSS=OFF
 	-DDLOPEN=ON
 	-DDSOUND=OFF
-	-DPORTAUDIO=ON
-	-DPULSEAUDIO=OFF
+	-DPORTAUDIO=OFF
+	-DPULSEAUDIO=ON
 	-DSOLARIS=OFF
-	-DWINMM=OFF
+	-DWINMM=ON
+	-DHAVE_PTHREAD=OFF
+	-DHAVE_LIBWINMM=ON -DEXTRA_LIBS=winmm
 	-DHAVE_VISIBILITY_SWITCH=OFF
 	-DHAVE_WINDOWS_H=OFF
 "
