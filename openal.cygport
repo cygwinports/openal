@@ -1,0 +1,50 @@
+inherit cmake
+
+NAME="openal"
+VERSION=1.15.1
+RELEASE=1
+CATEGORY="Libs"
+SUMMARY="Cross-platform 3D audio library"
+DESCRIPTION="OpenAL Soft is an LGPL-licensed, cross-platform, software
+implementation of the OpenAL 3D audio API. OpenAL provides capabilities for
+playing audio in a virtual 3D environment. Distance attenuation, doppler shift,
+and directional sound emitters are among the features handled by the API. More
+advanced effects, including air absorption, occlusion, and environmental
+reverb, are available through the EFX extension. It also facilitates streaming
+audio, multi-channel buffers, and audio capture."
+HOMEPAGE="http://kcat.strangesoft.net/openal.html"
+SRC_URI="http://kcat.strangesoft.net/openal-releases/openal-soft-${VERSION}.tar.bz2"
+SRC_DIR="openal-soft-${VERSION}"
+PATCH_URI="
+	1.15-cygwin.patch
+	1.15-noinst-examples.patch
+"
+
+PKG_NAMES="openal libopenal1 libopenal-devel"
+openal_CATEGORY="Audio"
+openal_SUMMARY="${SUMMARY} info utility"
+openal_CONTENTS="usr/bin/openal-info.exe usr/share/"
+libopenal1_REQUIRES="libportaudio2" # libpulse0
+libopenal1_CONTENTS="usr/bin/cygopenal-1.dll"
+libopenal_devel_CONTENTS="usr/bin/makehrtf.exe usr/include/ usr/lib/"
+
+# OSS backend plays incorrectly on Cygwin
+# PTHREAD means -pthread flag not pthread usage
+CYGCMAKE_ARGS="
+	-DALSA=OFF
+	-DOSS=OFF
+	-DDLOPEN=ON
+	-DDSOUND=OFF
+	-DPORTAUDIO=ON
+	-DPULSEAUDIO=ON
+	-DSOLARIS=OFF
+	-DWINMM=OFF
+	-DHAVE_PTHREAD=OFF
+	-DHAVE_LIBWINMM=OFF
+	-DHAVE_GCC_PROTECTED_VISIBILITY=OFF
+	-DHAVE_VISIBILITY_INTERNAL_SWITCH=OFF
+	-DHAVE_VISIBILITY_HIDDEN_SWITCH=OFF
+	-DHAVE_WINDOWS_H=OFF
+	-DHAVE_GUIDDEF_H=OFF
+	-DHAVE_INITGUID_H=OFF
+"

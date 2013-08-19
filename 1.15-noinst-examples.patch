@@ -1,0 +1,18 @@
+Allow building the examples for testing purposes if FFmpeg is present,
+but do not install them in order to allow openal into distro.
+
+--- origsrc/openal-soft-1.15.1/CMakeLists.txt	2013-04-10 01:17:26.279793600 -0500
++++ src/openal-soft-1.15.1/CMakeLists.txt	2013-08-19 17:05:26.327713900 -0500
+@@ -841,12 +841,6 @@ IF(EXAMPLES)
+         TARGET_LINK_LIBRARIES(allatency ${FFMPEG_LIBRARIES} ${LIBNAME})
+         SET_TARGET_PROPERTIES(allatency PROPERTIES COMPILE_FLAGS "${FFMPEG_CFLAGS}")
+ 
+-        INSTALL(TARGETS alstream alreverb allatency
+-                RUNTIME DESTINATION bin
+-                LIBRARY DESTINATION "lib${LIB_SUFFIX}"
+-                ARCHIVE DESTINATION "lib${LIB_SUFFIX}"
+-        )
+-
+         MESSAGE(STATUS "Building ffmpeg example programs")
+         MESSAGE(STATUS "")
+     ENDIF()
