@@ -1,7 +1,7 @@
 inherit cmake
 
 NAME="openal"
-VERSION=1.15.1
+VERSION=1.18.2
 RELEASE=1
 CATEGORY="Libs"
 SUMMARY="Cross-platform 3D audio library"
@@ -16,35 +16,55 @@ HOMEPAGE="http://kcat.strangesoft.net/openal.html"
 SRC_URI="http://kcat.strangesoft.net/openal-releases/openal-soft-${VERSION}.tar.bz2"
 SRC_DIR="openal-soft-${VERSION}"
 PATCH_URI="
-	1.15-cygwin.patch
-	1.15-noinst-examples.patch
+	1.18-cygwin.patch
 "
+#	1.18-noinst-examples.patch
 
-PKG_NAMES="openal libopenal1 libopenal-devel"
+PKG_NAMES="openal openal-config openal-examples libopenal1 libopenal-devel"
 openal_CATEGORY="Audio"
-openal_SUMMARY="${SUMMARY} info utility"
+openal_SUMMARY="${SUMMARY} utilities"
 openal_CONTENTS="usr/bin/openal-info.exe usr/share/"
+openal_config_CATEGORY="Audio"
+openal_config_SUMMARY="${SUMMARY} configuration GUI"
+openal_config_CONTENTS="usr/bin/alsoft-config.exe"
+openal_examples_CATEGORY="Audio"
+openal_examples_SUMMARY="${SUMMARY} examples"
+openal_examples_CONTENTS="--exclude=*-config.exe usr/bin/al*.exe"
 libopenal1_REQUIRES="libportaudio2" # libpulse0
 libopenal1_CONTENTS="usr/bin/cygopenal-1.dll"
-libopenal_devel_CONTENTS="usr/bin/makehrtf.exe usr/include/ usr/lib/"
+libopenal_devel_CONTENTS="
+	usr/bin/bsincgen.exe
+	usr/bin/makehrtf.exe
+	usr/include/AL/
+	usr/lib/cmake/OpenAL/
+	usr/lib/libopenal.dll.a
+	usr/lib/pkgconfig/openal.pc
+"
 
 # OSS backend plays incorrectly on Cygwin
 # PTHREAD means -pthread flag not pthread usage
 CYGCMAKE_ARGS="
-	-DALSA=OFF
-	-DOSS=OFF
-	-DDLOPEN=ON
-	-DDSOUND=OFF
-	-DPORTAUDIO=ON
-	-DPULSEAUDIO=ON
-	-DSOLARIS=OFF
-	-DWINMM=OFF
+	-DALSOFT_BACKEND_ALSA=OFF
+	-DALSOFT_BACKEND_COREAUDIO=OFF
+	-DALSOFT_BACKEND_DSOUND=OFF
+	-DALSOFT_BACKEND_JACK=OFF
+	-DALSOFT_BACKEND_MMDEVAPI=OFF
+	-DALSOFT_BACKEND_OPENSL=OFF
+	-DALSOFT_BACKEND_OSS=OFF
+	-DALSOFT_BACKEND_PORTAUDIO=ON
+	-DALSOFT_BACKEND_PULSEAUDIO=ON
+	-DALSOFT_BACKEND_PSA=OFF
+	-DALSOFT_BACKEND_SNDIO=OFF
+	-DALSOFT_BACKEND_SOLARIS=OFF
+	-DALSOFT_BACKEND_WAVE=ON
+	-DALSOFT_BACKEND_WINMM=OFF
+	-DALSOFT_DLOPEN=ON
 	-DHAVE_PTHREAD=OFF
-	-DHAVE_LIBWINMM=OFF
 	-DHAVE_GCC_PROTECTED_VISIBILITY=OFF
 	-DHAVE_VISIBILITY_INTERNAL_SWITCH=OFF
 	-DHAVE_VISIBILITY_HIDDEN_SWITCH=OFF
 	-DHAVE_WINDOWS_H=OFF
 	-DHAVE_GUIDDEF_H=OFF
 	-DHAVE_INITGUID_H=OFF
+	-DAVUTIL_LIBRARIES=NOTFOUND
 "
